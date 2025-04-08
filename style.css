@@ -3,46 +3,50 @@
 /* Basic styling for the body */
 body {
     font-family: 'Press Start 2P', cursive;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the start (top) */
-    justify-content: flex-start; /* Align content to the start (left) */
     min-height: 100vh;
     background-color: #2c3e50;
     color: #ecf0f1;
     margin: 0;
-    padding: 20px; /* Add padding around the body */
+    padding: 20px;
     box-sizing: border-box;
-    overflow-x: auto; /* Ensure horizontal scrolling is enabled if content overflows */
+    text-align: center; /* Center inline/block elements like H1, buttons */
 }
 
-/* Container for game controls and board */
+/* Container now only for the board */
 .game-container {
-    background-color: #34495e;
-    padding: 20px;
+    background-color: #34495e; /* Keep background for visual grouping */
+    padding: 10px; /* Adjust padding as needed */
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    margin: 20px auto; /* Add top/bottom margin and keep horizontal auto margin for centering when possible */
-    /* REMOVED: width: fit-content; Let content determine width, defaults to auto */
-    max-width: 100%; /* Prevent container from exceeding viewport width unnecessarily */
+    /* Removed Flexbox properties */
+    /* Center the container itself */
+    margin: 20px auto;
+    max-width: 100%;
     box-sizing: border-box;
+    /* Keep overflow for board scrolling */
+    overflow-x: auto;
+    width: fit-content; /* Allow container to size to the board */
 }
 
 h1 {
     color: #f1c40f;
+    margin-top: 0; /* Adjust margin */
     margin-bottom: 20px;
     font-size: 2em;
+    /* Centered by body text-align */
 }
 
 /* Styling for control elements */
 .controls {
     margin-bottom: 20px;
-    display: flex;
+    display: flex; /* Keep flex for internal layout */
     justify-content: center;
     align-items: center;
     gap: 15px;
     flex-wrap: wrap;
+    /* width: 100%; No longer needed */
+    /* Centering handled by body text-align (as flex container acts like inline-block sometimes)
+       or add margin: auto if needed, but text-align should work */
 }
 
 /* Shared button styles */
@@ -77,13 +81,18 @@ h1 {
 
 /* Styling for game status display */
 .status {
-    display: flex;
+    display: flex; /* Keep flex for internal layout */
     justify-content: space-around;
     margin-bottom: 20px;
     background-color: #2c3e50;
     padding: 10px;
     border-radius: 8px;
     font-size: 0.9em;
+    width: 90%; /* Give status bar a width */
+    max-width: 400px; /* Max width for status bar */
+    /* Center the status bar itself */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Styling for the game board */
@@ -92,12 +101,15 @@ h1 {
     gap: 2px;
     background-color: #7f8c8d;
     border: 5px solid #7f8c8d;
-    margin-left: auto; /* Keep board centered within container */
+    /* Center the board block within the container */
+    margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px; /* Add space below board before hint button */
-    width: fit-content; /* Calculate width based on grid content */
-    /* REMOVED: max-width: 100%; Allow board to exceed container if needed */
+    /* Removed margin-bottom, container padding handles space */
+    /* Width is set by JavaScript inline style */
     box-sizing: border-box;
+    /* Ensure board background stays behind cells */
+    position: relative;
+    z-index: 1;
 }
 
 /* Styling for individual cells - FIXED SIZE */
@@ -107,6 +119,8 @@ h1 {
     justify-content: center; font-size: 1em; font-weight: bold;
     cursor: pointer; user-select: none; box-sizing: border-box;
     transition: background-color 0.2s;
+    position: relative; /* Ensure cells are above board background */
+    z-index: 2;
 }
 .cell.revealed { background-color: #bdc3c7; border: 1px solid #7f8c8d; cursor: default; }
 .cell.revealed[data-count]:not([data-count="0"]) { cursor: pointer; }
@@ -152,12 +166,13 @@ h1 {
 .modal-close-button:hover { background-color: #c0392b; transform: scale(1.1); }
 .modal-close-button:active { box-shadow: none; transform: translateY(1px); }
 
-/* Hint Button Styling (Now inside game container) */
+/* Hint Button Styling (Now outside game container) */
 #hint-button {
     background-color: #3498db; /* Blue hint button */
     box-shadow: 0 4px #2980b9;
-    margin-top: 0; /* Reset top margin as space is handled by board's bottom margin */
-    margin-bottom: 0; /* No bottom margin needed inside container */
+    margin-top: 15px; /* Space above hint button */
+    margin-bottom: 15px; /* Space below hint button */
+    /* Centered by body text-align */
 }
 #hint-button:hover {
     background-color: #2980b9;
@@ -182,23 +197,33 @@ footer {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-/* Responsive adjustments */
+/* --- Responsive Adjustments --- */
+
+/* Default Cell Size (matches JS CELL_SIZE_DEFAULT) */
+.cell { width: 30px; height: 30px; font-size: 1em; }
+
+/* Smaller Screens */
 @media (max-width: 600px) {
     body { padding: 10px; } /* Reduce body padding */
-    .game-container { padding: 15px; margin: 10px auto; }
+    .game-container { padding: 8px; margin: 10px auto; } /* Adjust container padding */
     h1 { font-size: 1.5em; }
     .controls { flex-direction: column; gap: 10px; }
+    /* Adjust cell size for smaller screens (matches JS check) */
     .cell { width: 28px; height: 28px; font-size: 0.9em; }
-    .status { font-size: 0.8em; }
+    .status { font-size: 0.8em; width: 95%;} /* Adjust status width */
     .message-content { width: 95%; padding: 20px; padding-top: 40px; }
     .message-content h2 { font-size: 1.3em; }
     .message-content p { font-size: 0.9em; }
     footer { font-size: 1.1em; }
 }
+
+/* Smallest Screens */
  @media (max-width: 400px) {
      body { padding: 5px; } /* Further reduce body padding */
-     .game-container { padding: 10px; margin: 5px auto; }
+     .game-container { padding: 5px; margin: 5px auto; } /* Adjust container padding */
+     /* Adjust cell size for smallest screens (matches JS check) */
      .cell { width: 25px; height: 25px; font-size: 0.8em; }
+     .status { width: 100%; } /* Allow status to take full width */
      .message-content h2 { font-size: 1.1em; }
      .message-content p { font-size: 0.8em; }
      footer { font-size: 1em; }

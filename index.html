@@ -15,25 +15,31 @@
 </head>
 <body>
 
+    <h1>Minesweeper</h1>
+
+    <div class="controls">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy (9x9, 10 Mines)</option>
+            <option value="medium">Medium (16x16, 40 Mines)</option>
+            <option value="hard">Hard (30x16, 99 Mines)</option>
+        </select>
+        <button id="reset-button">Reset Game</button>
+    </div>
+
+    <div class="status">
+        <div id="timer">Time: 0s</div>
+        <div id="mines-left">Mines Left: 0</div>
+    </div>
+
     <div class="game-container">
-        <h1>Minesweeper</h1>
-        <div class="controls">
-            <label for="difficulty">Difficulty:</label>
-            <select id="difficulty">
-                <option value="easy">Easy (9x9, 10 Mines)</option>
-                <option value="medium">Medium (16x16, 40 Mines)</option>
-                <option value="hard">Hard (30x16, 99 Mines)</option>
-            </select>
-            <button id="reset-button">Reset Game</button>
-        </div>
-        <div class="status">
-            <div id="timer">Time: 0s</div>
-            <div id="mines-left">Mines Left: 0</div>
-        </div>
         <div class="board" id="board">
             </div>
-        <button id="hint-button">Hint</button>
-    </div> <div id="message-box" class="message-box">
+    </div>
+
+    <button id="hint-button">Hint</button>
+
+    <div id="message-box" class="message-box">
         <div class="message-content">
             <h2 id="message-title">Game Over!</h2>
             <p id="message-text">You hit a mine!</p>
