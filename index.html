@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Minesweeper</h1>
+        <div class="controls">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty">
+                <option value="easy">Easy (9x9, 10 Mines)</option>
+                <option value="medium">Medium (16x16, 40 Mines)</option>
+                <option value="hard">Hard (30x16, 99 Mines)</option>
+            </select>
+            <button id="reset-button">Reset Game</button>
+        </div>
+        <div class="status">
+            <div id="timer">Time: 0s</div>
+            <div id="mines-left">Mines Left: 0</div>
+        </div>
+        <div class="board" id="board">
+            </div>
+        <button id="hint-button">Hint</button>
+    </div> <div id="message-box" class="message-box">
+        <div class="message-content">
+            <h2 id="message-title">Game Over!</h2>
+            <p id="message-text">You hit a mine!</p>
+            <button id="message-close-button">Play Again</button>
+        </div>
+    </div>
+
+    <div id="hint-modal" class="message-box">
+        <div class="message-content">
+            <button id="hint-close-button" class="modal-close-button">X</button>
+            <h2>Hint: Chording</h2>
+            <p>If you double-click a revealed number cell, and the number of adjacent flagged cells (🚩) matches that number, all other adjacent hidden cells will be automatically revealed. Be careful, if you flagged incorrectly, you might reveal a mine! 💣</p>
+        </div>
+    </div>
+
+    <footer>
+        TK [LOVENOX199]
+    </footer>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>
