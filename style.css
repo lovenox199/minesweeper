@@ -5,18 +5,15 @@ body {
     font-family: 'Press Start 2P', cursive;
     display: flex;
     flex-direction: column;
-    /* Align items to the start (top) instead of center to allow overflow scrolling */
-    align-items: flex-start;
-    /* Keep horizontal centering for when content fits */
-    justify-content: flex-start; /* Changed from center to allow left alignment when overflowing */
+    align-items: flex-start; /* Align items to the start (top) */
+    justify-content: flex-start; /* Align content to the start (left) */
     min-height: 100vh;
     background-color: #2c3e50;
     color: #ecf0f1;
     margin: 0;
     padding: 20px; /* Add padding around the body */
     box-sizing: border-box;
-    /* Ensure horizontal scrolling is enabled if content overflows */
-    overflow-x: auto;
+    overflow-x: auto; /* Ensure horizontal scrolling is enabled if content overflows */
 }
 
 /* Container for game controls and board */
@@ -26,8 +23,8 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     text-align: center;
-    margin: 20px auto; /* Add top/bottom margin and keep horizontal auto margin */
-    width: fit-content; /* Ensure container shrinks/grows */
+    margin: 20px auto; /* Add top/bottom margin and keep horizontal auto margin for centering when possible */
+    /* REMOVED: width: fit-content; Let content determine width, defaults to auto */
     max-width: 100%; /* Prevent container from exceeding viewport width unnecessarily */
     box-sizing: border-box;
 }
@@ -98,8 +95,8 @@ h1 {
     margin-left: auto; /* Keep board centered within container */
     margin-right: auto;
     margin-bottom: 15px; /* Add space below board before hint button */
-    width: fit-content;
-    max-width: 100%;
+    width: fit-content; /* Calculate width based on grid content */
+    /* REMOVED: max-width: 100%; Allow board to exceed container if needed */
     box-sizing: border-box;
 }
 
